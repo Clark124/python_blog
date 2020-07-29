@@ -151,6 +151,8 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
 # 前端请求图片资源的路径
 MEDIA_URL = '/media/'
 # 后端服务器图片存储目录
