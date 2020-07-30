@@ -151,7 +151,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "build/static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "build/static")
+
+# python3 manager.py collectstatic  将app里的static文件复制到build/static
+# STATIC_ROOT = os.path.join(BASE_DIR, "build/static")
 
 # 前端请求图片资源的路径
 MEDIA_URL = '/media/'
