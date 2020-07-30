@@ -17,14 +17,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
-from django.urls import path,re_path
+from django.urls import path
 from django.conf.urls import url, include
-from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
     path(r'', views.index),
-    # path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     url(r'v1/users', include('user.urls')),
     url(r'v1/token', include('btoken.urls')),
