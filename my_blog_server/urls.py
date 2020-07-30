@@ -17,17 +17,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url, include
+from django.urls import path, include
+# from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
     path(r'', views.index),
     path('admin/', admin.site.urls),
-    url(r'v1/users', include('user.urls')),
-    url(r'v1/token', include('btoken.urls')),
-    url(r'v1/topics', include('topic.urls')),
-    url(r'v1/messages', include('message_self.urls')),
+    path('v1/users', include('user.urls')),
+    path('v1/token', include('btoken.urls')),
+    path('v1/topics', include('topic.urls')),
+    path('v1/messages/', include('message_self.urls')),
 ]
 
 # 添加图片路由映射 http://127.0.0.1:8000/media/aaa.jpg
