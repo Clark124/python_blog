@@ -111,7 +111,7 @@ def topics(request, username=None):
         if not content_text:
             result = {'code': 307, 'error': '纯文本不能为空！'}
             return JsonResponse(result)
-        introduce = content_text[:30]
+        introduce = content_text[:100]
 
         category = json_obj.get("category")
         if category not in ['tec', 'no-tec']:
