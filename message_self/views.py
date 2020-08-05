@@ -36,9 +36,17 @@ def messages(request, topic_id):
             result = {"code": 404, 'error': '留言内容不能为空！'}
             return JsonResponse(result)
 
-        Message.objects.create(topic=topic, author=author,
-                               content=content, )
-        result = {'code': 200, 'data': {}}
+        message = Message.objects.create(topic=topic, author=author,
+                                         content=content, )
+        result = {'code': 200, 'data': {
+            'author': author.nickname,
+            'author_id': author.username,
+            'avatar': str(author.avatar),
+            'content': content,
+            'created_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'message_id': message.id,
+            'replys': [],
+        }}
         return JsonResponse(result)
 
 
@@ -79,9 +87,17 @@ def reply(request, topic_id, message_id):
         if reply_to_user:
             reply_to_user = reply_to_user.username
 
-        Reply.objects.create(message=message, author=author, reply_to=reply_to_user,
-                             content=content, )
-        result = {'code': 200, 'data': {}}
+        reply_item = Reply.objects.create(message=message, author=author, reply_to=reply_to_user,
+                                          content=content, )
+        result = {'code': 200, 'data': {
+            'author': author.nickname,
+            'author_id': author.username,
+            'avatar': str(author.avatar),
+            'created_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'content': content,
+            'reply_id': reply_item.id
+
+        }}
         return JsonResponse(result)
 
     elif request.method == 'DELETE':

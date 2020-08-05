@@ -15,14 +15,9 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-
 from django.contrib import admin
 from django.urls import path, include, re_path
-
-# from django.conf.urls import url, include
 from django.views.generic import TemplateView
-
-from . import views
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
@@ -31,8 +26,10 @@ urlpatterns = [
     path('v1/token', include('btoken.urls')),
     path('v1/topics', include('topic.urls')),
     path('v1/messages/', include('message_self.urls')),
-    re_path(r'.*', TemplateView.as_view(template_name='index.html')),
+    path('v1/upload/', include('upload.urls'))
 ]
 
 # 添加图片路由映射 http://127.0.0.1:8000/media/aaa.jpg
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [re_path(r'.*', TemplateView.as_view(template_name='index.html'))]

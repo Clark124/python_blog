@@ -54,7 +54,11 @@ def btoken(request):
 
     # 生成token
     token = make_token(username)
-    result = {'code': 200, 'username': username, 'data': {'token': token.decode()}}
+    result = {'code': 200, 'username': username,
+              'data': {'token': token.decode(), 'avatar': str(users[0].avatar),
+                       'nickname': users[0].nickname
+                       }
+              }
     return JsonResponse(result)
 
 

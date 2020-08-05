@@ -13,3 +13,6 @@ class TopicManager(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(models.Topic, TopicManager)
+
+admin.site.register(models.TopicRecommend)
+admin.site.register(models.Carousel)
