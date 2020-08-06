@@ -24,7 +24,7 @@ class Topic(models.Model):
     modified_time = models.DateTimeField()
     # 留言
     content = models.TextField('文章内容')
-    introduce = models.CharField('文章简介', max_length=90)
+    introduce = models.CharField('文章简介', max_length=150)
 
     class Meta:
         # 自定义表名
