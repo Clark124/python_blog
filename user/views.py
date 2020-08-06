@@ -108,8 +108,8 @@ def users(request, username=None):
         h = hashlib.sha1()
         h.update(password_1.encode())
         try:
-            models.UserProfile.objects.create(username=username, nickname=username,
-                                              email=email, password=h.hexdigest())
+            new_user = models.UserProfile.objects.create(username=username, nickname=username,
+                                                         email=email, password=h.hexdigest())
         except Exception as e:
             print("UserProfile create error is %s" % (e))
             result = {"code": 207, "error": 'The username is existed'}
@@ -117,7 +117,8 @@ def users(request, username=None):
 
         # 根据用户名 生成token
         token = make_token(username)
-        result = {'code': 200, 'username': username, 'data': {'token': token.decode()}}
+        result = {'code': 200, 'username': username,
+                  'data': {'token': token.decode(), 'nickname': username, 'avatar': new_user.avatar}}
         return JsonResponse(result)
 
     elif request.method == 'PUT':
